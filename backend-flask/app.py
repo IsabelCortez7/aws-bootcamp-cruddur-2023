@@ -1,3 +1,4 @@
+import services.show_activity as show_activity
 from flask import Flask
 from flask import request
 from flask_cors import CORS, cross_origin
@@ -64,6 +65,11 @@ def data_create_message():
 @app.route("/api/activities/home", methods=['GET'])
 def data_home():
   data = HomeActivities.run()
+  return data, 200
+
+@app.route("/api/activities/notifications", methods=['GET'])
+def data_notifications():
+  data = NotificationsActivities.run()
   return data, 200
 
 @app.route("/api/activities/@<string:handle>", methods=['GET'])
