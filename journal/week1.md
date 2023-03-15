@@ -69,6 +69,22 @@ You should see port 4567 and port 3000 running. Make sure to unlock both of them
 
 ![OpenPorts](assets/Wk1OpenPorts.png)
 
-If you click port 3000, you should see the home page below. This means that the front end and back end are communicating and multiple containers are running.
+If you click port 3000, you should see the Cruddur home page below. This means that the front end and back end are communicating and multiple containers are running.
 
 ![CruddurFrontend](assets/Wk1CruddurFrontend.png)
+
+### 2. Document the Notification Endpoint for the OpenAI Document
+Here is where I'll be documenting:
+![OpenAPI](assets/Wk1OpenAPI.png)
+
+If I go back to the Cruddur page, I can log in by using mock authentication. This is not connected to a database. Instead, it's running off of cookies.
+Once we are logged in, I can see that all pages are completed, except the "Notifications" page. I begin by adding the notification endpoint ``` /api/activities/notifications ``` to the ``` openapi-3.0.yml ``` file as shown below:
+
+![openapiNotificationEndpoint](assets/Wk1openapiNotificationEndpoint.png)
+    
+### 3. Write a Flask Backend Endpoint for Notifications
+I go to ``` backend-flask/app.py ``` to add the following Flask route:
+```
+
+
+
