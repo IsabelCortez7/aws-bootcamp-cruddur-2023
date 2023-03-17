@@ -91,7 +91,7 @@ Then, I create ``` notifications_activities.py ``` under ``` backend-flask/servi
 
 Port 4567 should be running through Gitpod and once I unlock the port, I click on the URL and add ``` /api/activities/notifications ``` at the end to see JSON
 
-### Write a React Page for Notifications
+### 4. Write a React Page for Notifications
 I go to ``` frontend-react-js/src/App.js ``` and add ```import NotificationsFeedPage from './pages/NotificationsFeedPage'; ``` along with adding
 ```
 {
@@ -109,3 +109,45 @@ I also changed line 23 to ``` const backend_url = '${process.env.REACT_APP_BACKE
 When I click on the Notifications tab on Cruddur, I can see the following which means we are done with the frontend!
 
 ![CruddurNotifications](assets/Wk1CruddurNotifications.png)
+
+### 5. Run DynamoDB Local Container and ensure it works
+I open the ```docker-compose.yaml ``` file and copy the ```dynamodb-local``` and the ```portgres``` code into it as shown below:
+
+![DynamoDBDatabases](assets/Wk1DynamoDBDatabases.png)
+
+Then, I right-click on this file and click compose up. I confirm that port 8000 is open and continue to create a DynamoDB database as shown below:
+
+![DynamoDBDatabases](assets/Wk1DynamoDBDatabases.png)
+
+I can list the tables as shown below:
+
+![DynamoDBTable2](assets/Wk1DynamoDBTable2.png)
+
+### 6. Run Postgres Container and ensure it works
+First, I open the ```gitpod.yml``` file and insert the following client library for Postgres to be able to interact with the server:
+```
+  - name: postgres
+    init: |
+      curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc|sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/postgresql.gpg
+      echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" |sudo tee  /etc/apt/sources.list.d/pgdg.list
+      sudo apt update
+      sudo apt install -y postgresql-client-13 libpq-dev
+```
+
+Then, we run these lines:
+```
+      curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc|sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/postgresql.gpg
+      echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" |sudo tee  /etc/apt/sources.list.d/pgdg.list
+      sudo apt update
+```
+
+To confirm the connection was made, I run the following command and I should see the following table:
+
+![Postgresconnection2](assets/Wk1Postgresconnection2.png)
+
+Next, I install a PostgreSQL client as an extension and add it to the ```gitpod.yml``` file by clicking on the gear icon and choosing that option. <br>
+The line ```cweijan.vscode-postgresql-client2``` should apprear at the end of the file.
+
+I then click on the database explorer icon and click the add icon. After filling out the follwoing fields, I get a successful connection message.
+
+![Postgresconnection](assets/Wk1Postgresconnection.png)
